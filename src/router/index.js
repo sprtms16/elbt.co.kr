@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import ProductView from "@/views/ProductView.vue";
 
 Vue.use(VueRouter);
 
@@ -11,13 +12,9 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: "/product/:product",
+    name: "product",
+    component: ProductView,
   },
 ];
 
@@ -25,6 +22,15 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+  scrollBehavior(to) {
+    if (to.hash) {
+      return {
+        selector: to.hash,
+        behavior: "smooth",
+      };
+    }
+    return { x: 0, y: 0, behavior: "smooth" }; // Go to the top of the page if no hash
+  },
 });
 
 export default router;

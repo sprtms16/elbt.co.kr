@@ -1,0 +1,9 @@
+.generic-wrapper {
+    max-width: 1024px;
+    width: 100%;
+}
+@media screen and (max-width: 480px) {
+    .generic-wrapper {
+        width: 100vw;
+    }
+}
